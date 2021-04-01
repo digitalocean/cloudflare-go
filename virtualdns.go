@@ -78,11 +78,11 @@ func (api *API) CreateUserVirtualDNS(ctx context.Context, v *VirtualDNS) (*Virtu
 	return api.createVirtualDNS(ctx, "/user/virtual_dns", v)
 }
 
-// CreateOrganizationVirtualDNS creates a new Virtual DNS cluster.
+// CreateAccountVirtualDNS creates a new Virtual DNS cluster.
 //
 // API reference: https://api.cloudflare.com/#dns-firewall-accounts--create-dns-firewall-cluster
-func (api *API) CreateOrganizationVirtualDNS(ctx context.Context, organizationID string, v *VirtualDNS) (*VirtualDNS, error) {
-	uri := fmt.Sprintf("/accounts/%v/virtual_dns", organizationID)
+func (api *API) CreateAccountVirtualDNS(ctx context.Context, accountID string, v *VirtualDNS) (*VirtualDNS, error) {
+	uri := fmt.Sprintf("/accounts/%v/virtual_dns", accountID)
 	return api.createVirtualDNS(ctx, uri, v)
 }
 
@@ -107,11 +107,11 @@ func (api *API) UserVirtualDNS(ctx context.Context, virtualDNSID string) (*Virtu
 	return api.getVirtualDNS(ctx, uri)
 }
 
-// OrganizationVirtualDNS fetches a single virtual DNS cluster.
+// AccountVirtualDNS fetches a single virtual DNS cluster.
 //
 // API reference: https://api.cloudflare.com/#dns-firewall-accounts--dns-firewall-cluster-details
-func (api *API) OrganizationVirtualDNS(ctx context.Context, organizationID string, virtualDNSID string) (*VirtualDNS, error) {
-	uri := fmt.Sprintf("/accounts/%v/virtual_dns/%v", organizationID, virtualDNSID)
+func (api *API) AccountVirtualDNS(ctx context.Context, accountID string, virtualDNSID string) (*VirtualDNS, error) {
+	uri := fmt.Sprintf("/accounts/%v/virtual_dns/%v", accountID, virtualDNSID)
 	return api.getVirtualDNS(ctx, uri)
 }
 
@@ -135,11 +135,11 @@ func (api *API) ListUserVirtualDNS(ctx context.Context) ([]*VirtualDNS, error) {
 	return api.listVirtualDNS(ctx, "/user/virtual_dns")
 }
 
-// ListOrganizationVirtualDNS lists the virtual DNS clusters associated with an account.
+// ListAccountVirtualDNS lists the virtual DNS clusters associated with an account.
 //
 // API reference: https://api.cloudflare.com/#dns-firewall-accounts--list-dns-firewall-clusters
-func (api *API) ListOrganizationVirtualDNS(ctx context.Context, organizationID string) ([]*VirtualDNS, error) {
-	uri := fmt.Sprintf("/accounts/%v/virtual_dns", organizationID)
+func (api *API) ListAccountVirtualDNS(ctx context.Context, accountID string) ([]*VirtualDNS, error) {
+	uri := fmt.Sprintf("/accounts/%v/virtual_dns", accountID)
 	return api.listVirtualDNS(ctx, uri)
 }
 
@@ -164,11 +164,11 @@ func (api *API) UpdateUserVirtualDNS(ctx context.Context, virtualDNSID string, v
 	return api.updateVirtualDNS(ctx, uri, vv)
 }
 
-// UpdateOrganizationVirtualDNS updates a Virtual DNS cluster.
+// UpdateAccountVirtualDNS updates a Virtual DNS cluster.
 //
 // API reference: https://api.cloudflare.com/#dns-firewall-accounts--update-dns-firewall-cluster
-func (api *API) UpdateOrganizationVirtualDNS(ctx context.Context, organizationID string, virtualDNSID string, vv *VirtualDNS) error {
-	uri := fmt.Sprintf("/accounts/%v/virtual_dns/%v", organizationID, virtualDNSID)
+func (api *API) UpdateAccountVirtualDNS(ctx context.Context, accountID string, virtualDNSID string, vv *VirtualDNS) error {
+	uri := fmt.Sprintf("/accounts/%v/virtual_dns/%v", accountID, virtualDNSID)
 	return api.updateVirtualDNS(ctx, uri, vv)
 }
 
@@ -194,12 +194,12 @@ func (api *API) DeleteUserVirtualDNS(ctx context.Context, virtualDNSID string) e
 	return api.deleteVirtualDNS(ctx, uri)
 }
 
-// DeleteOrganizationVirtualDNS deletes a Virtual DNS cluster. Note that this cannot be
+// DeleteAccountVirtualDNS deletes a Virtual DNS cluster. Note that this cannot be
 // undone, and will stop all traffic to that cluster.
 //
 // API reference: https://api.cloudflare.com/#dns-firewall-accounts--delete-dns-firewall-cluster
-func (api *API) DeleteOrganizationVirtualDNS(ctx context.Context, organizationID string, virtualDNSID string) error {
-	uri := fmt.Sprintf("/accounts/%v/virtual_dns/%v", organizationID, virtualDNSID)
+func (api *API) DeleteAccountVirtualDNS(ctx context.Context, accountID string, virtualDNSID string) error {
+	uri := fmt.Sprintf("/accounts/%v/virtual_dns/%v", accountID, virtualDNSID)
 	return api.deleteVirtualDNS(ctx, uri)
 }
 
@@ -237,11 +237,11 @@ func (api *API) UserVirtualDNSUserAnalytics(ctx context.Context, virtualDNSID st
 	return api.virtualDNSUserAnalytics(ctx, uri)
 }
 
-// OrganizationVirtualDNSUserAnalytics retrieves analytics report for a specified dimension and time range
+// AccountVirtualDNSUserAnalytics retrieves analytics report for a specified dimension and time range
 //
 // API reference: https://api.cloudflare.com/#dns-firewall-analytics-accounts--table
-func (api *API) OrganizationVirtualDNSUserAnalytics(ctx context.Context, organizationID string, virtualDNSID string, o VirtualDNSUserAnalyticsOptions) (VirtualDNSAnalytics, error) {
-	uri := fmt.Sprintf("/accounts/%v/virtual_dns/%v/dns_analytics/report?%v", organizationID, virtualDNSID, o.encode())
+func (api *API) AccountVirtualDNSUserAnalytics(ctx context.Context, accountID string, virtualDNSID string, o VirtualDNSUserAnalyticsOptions) (VirtualDNSAnalytics, error) {
+	uri := fmt.Sprintf("/accounts/%v/virtual_dns/%v/dns_analytics/report?%v", accountID, virtualDNSID, o.encode())
 	return api.virtualDNSUserAnalytics(ctx, uri)
 }
 
